@@ -2,12 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
-import axios from 'axios'
-
+import Welcome from '../components/Welcome.vue'
+// import axios from 'axios'
+import Users from '../components/user/Users.vue'
 
 // 配置请求root path
-axios.defaults.baseURL='http://127.0.0.1:8888/api/private/v1/'
-Vue.prototype.$http=axios
 Vue.use(VueRouter)
 const router = new VueRouter({
   routes: [{
@@ -20,7 +19,11 @@ const router = new VueRouter({
     },
     {
       path: '/home',
-      component: Home
+      component: Home,
+      redirect:'/welcome',
+      children:[{path:'/welcome',component:Welcome},{path:'/users',component:Users}],
+      // children:[{path:'/user',component:User}]
+      
     }
   ]
 })
